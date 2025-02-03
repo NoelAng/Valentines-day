@@ -4,18 +4,28 @@ function selectOption(option) {
         // Flash rainbow colors
         flashRainbowColors(function() {
             document.getElementById('question').style.display = 'none'; // Hide the question
-            displayCatHeart(); // Display the cat-heart.gif
             
-            // Add text message when "Yes" is clicked
+            // Display the cat-heart.gif
+            displayCatHeart();
+
+            // Create the text message
             var message = document.createElement('p');
             message.innerText = "Yay! You made the right choice! ❤️";
             message.style.fontSize = "32px";
             message.style.fontFamily = "'Sacramento', cursive";
             message.style.color = "#FB607F";
             message.style.marginTop = "20px";
+            message.id = "yes-message"; // Assign an ID for future reference
+            
+            // Ensure previous messages are removed before adding a new one
+            var existingMessage = document.getElementById("yes-message");
+            if (existingMessage) {
+                existingMessage.remove();
+            }
 
-            // Append the message to the container
-            document.getElementById('image-container').appendChild(message);
+            // Insert the message ABOVE the image
+            var imageContainer = document.getElementById('image-container');
+            imageContainer.prepend(message);
         });
     } else if (option === 'no') {
         // Change text on the "No" button to "You sure?"
